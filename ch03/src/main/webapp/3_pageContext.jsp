@@ -20,5 +20,21 @@
 		
 		%>
 		
+		
+		<!--  정적 include -->
+		<%@ include file="./inc/_header.jsp" %>
+		<%@ include file="./inc/_footer.jsp" %>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	</body>
 </html>
