@@ -3,10 +3,10 @@
 	<html>
 	<head>
 		<meta charset="UTF-8">
-		<title>1_jdbc</title>
+		<title>2_dbcp</title>
 	</head>
 	<body>
-	<h3>1.JDBC 실습</h3>
+	<h3>2.DBCP(DataBase Connection Pool) 실습</h3>
 		
 		<!-- 절대경로 -->
 		<a href="/ch05/user1/list.jsp">User1 목록</a><br>

@@ -81,8 +81,8 @@
 					<td><%= user2.getBirth() %></td>
 					<td><%= user2.getAddr() %></td>
 					<td>
-						<a href="#">수정</a>
-						<a href="#">삭제</a>
+						<a href="/ch05/user2/modify.jsp?userid=<%= user2.getUserid()%>">수정</a>
+						<a href="/ch05/user2/proc/delete.jsp?userid=<%= user2.getUserid() %>">삭제</a>
 					</td>
 				</tr>
 			<%
