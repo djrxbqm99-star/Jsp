@@ -1,4 +1,4 @@
-package controller.user2;
+package controller.user3;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import service.User1Service;
 
-@WebServlet("/user2/modify.do")
+@WebServlet("/user3/modify.do")
 public class ModifyController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

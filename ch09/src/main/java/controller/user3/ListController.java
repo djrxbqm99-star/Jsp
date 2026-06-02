@@ -1,4 +1,4 @@
-package controller.user2;
+package controller.user3;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import service.User1Service;
 
-@WebServlet("/user2/list.do")
+@WebServlet("/user3/list.do")
 public class ListController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

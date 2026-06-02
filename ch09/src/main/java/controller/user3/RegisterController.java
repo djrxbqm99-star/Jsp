@@ -1,4 +1,4 @@
-package controller.user2;
+package controller.user3;
 
 import java.io.IOException;
 
@@ -11,30 +11,20 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import service.User1Service;
 
-@WebServlet("/user2/modify.do")
-public class ModifyController extends HttpServlet {
+@WebServlet("/user3/register.do")
+public class RegisterController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
 	// 서비스 가져오기
 	private User1Service service = User1Service.getInstance();
 	
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		// 전송 데이터 수신, 항상 수신데이터 출력해서 확인하는 습관!!!
-		String userid = req.getParameter("userid");
-		System.out.println(userid);
-		
-		// 수정 데이터 조회
-		User1DTO dto = service.findbyId(userid);
-		
-		// View 데이터 참조
-		req.setAttribute("user1DTO", dto);
-		
-		
 		// View forward
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user1/modify.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user1/register.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
@@ -53,14 +43,13 @@ public class ModifyController extends HttpServlet {
 		dto.setUserid(userid);
 		dto.setName(name);
 		dto.setHp(hp);
-		dto.setAge(age);		
-		System.out.println(dto);
+		dto.setAge(age);
 		
-		// 수정 서비스 메서드 호출
-		service.modify(dto);
+		// 등록 서비스 메서드 호출
+		service.register(dto);
 		
 		// 목록 리다이렉트
-		resp.sendRedirect("/ch09/user1/list.do?modify=success");
+		resp.sendRedirect("/ch09/user1/list.do?register=success");
 	}
 	
 
