@@ -3,9 +3,9 @@ package kr.co.jboard.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import kr.co.jboard.dto.ArticleDTO;
-import kr.co.jboard.utill.DBHelper;
-import kr.co.jboard.utill.SQL;
+import kr.co.jboard.dto.CommentDTO;
+import kr.co.jboard.util.DBHelper;
+import kr.co.jboard.util.SQL;
 
 public class CommentDAO extends DBHelper {
 	
@@ -16,124 +16,79 @@ public class CommentDAO extends DBHelper {
 	}
 	private CommentDAO() {}
 	
+	
 	// 기본 CRUD 메서드
-	public ArticleDTO select(String ano) {
+	public CommentDTO select(String cno) {
 		
-		ArticleDTO dto = null;
+		// 반환용 DTO
+		CommentDTO dto = null;
 		
 		try {
-			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_ARTICLE);
-			psmt.setString(1, ano);
+			conn = getConnection();						
+			psmt = conn.prepareStatement(SQL.SELECT_COMMENT);
 			
-			psmt.executeQuery();
+			rs = psmt.executeQuery();
+			
 			if(rs.next()) {
-				dto = new ArticleDTO();
-				dto.setAno(rs.getInt(1));
-				dto.setType(rs.getString(2));
-				dto.setTitle(rs.getString(3));
-				dto.setContent(rs.getString(4));
-				dto.setComment(rs.getInt(5));
-				dto.setFile(rs.getInt(6));
-				dto.setHit(rs.getInt(7));
-				dto.setWriter(rs.getString(8));
-				dto.setRegip(rs.getString(9));
-				dto.setWdate(rs.getString(10));
-			}
+				dto = new CommentDTO();
+			}			
 			closeAll();
-			
-			
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return dto;
 	}
-	public List<ArticleDTO> selectAll() {
+	
+	public List<CommentDTO> selectAll() {
 		
 		// 반환용 List
-		List<ArticleDTO> dtoList = new ArrayList<>();
+		List<CommentDTO> dtoList = new ArrayList<>();
 		
 		try {
 			conn = getConnection();
 			stmt = conn.createStatement();
+			rs = stmt.executeQuery(SQL.SELECT_ALL_COMMENT);
 			
-			rs = stmt.executeQuery(SQL.SELECT_ALL_ARTICLE);
 			while(rs.next()) {
-				ArticleDTO dto = new ArticleDTO();
-				dto = new ArticleDTO();
-				dto.setAno(rs.getInt(1));
-				dto.setType(rs.getString(2));
-				dto.setTitle(rs.getString(3));
-				dto.setContent(rs.getString(4));
-				dto.setComment(rs.getInt(5));
-				dto.setFile(rs.getInt(6));
-				dto.setHit(rs.getInt(7));
-				dto.setWriter(rs.getString(8));
-				dto.setRegip(rs.getString(9));
-				dto.setWdate(rs.getString(10));
-				
+				CommentDTO dto = new CommentDTO();
 				dtoList.add(dto);
 			}
-			
 			closeAll();
-			
-		} catch(Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
 		return dtoList;
 	}
-	public void insert(ArticleDTO dto) {
+	
+	public void insert(CommentDTO dto) {
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.INSERT_ARTICLE);
-			psmt.setString(1, dto.getTitle());
-			psmt.setString(2, dto.getContent());
-			psmt.setString(3, dto.getWriter());
-			psmt.setString(4, dto.getRegip());
+			psmt = conn.prepareStatement(SQL.INSERT_COMMENT);
 			psmt.executeUpdate();
-			
 			closeAll();
-			
-			
-			
-		} catch(Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
-	public void update(ArticleDTO dto) {
-		
+	
+	public void update(CommentDTO dto) {
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.UPDATE_ARTICLE);
-			psmt.setString(1, dto.getTitle());
-			psmt.setString(2, dto.getContent());
-			psmt.setInt(3, dto.getAno());
+			psmt = conn.prepareStatement(SQL.UPDATE_COMMENT);
 			psmt.executeUpdate();
-			
 			closeAll();
-			
-			
-			
-		} catch(Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
-	public void delete(String ano) {
+
+	public void delete(String cno) {
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.DELETE_ARTICLE);
-			psmt.setString(1, ano);
+			psmt = conn.prepareStatement(SQL.DELETE_COMMENT);
 			psmt.executeUpdate();
-			
 			closeAll();
-			
-			
-			
-		} catch(Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

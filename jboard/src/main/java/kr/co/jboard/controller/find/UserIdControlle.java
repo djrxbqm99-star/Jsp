@@ -9,20 +9,24 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/find/resultUserid.do")
-public class ResultUseridController extends HttpServlet {
+@WebServlet("/find/userId.do")
+public class UserIdControlle extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher =  req.getRequestDispatcher("/WEB-INF/views/find/resultUserid.jsp");
-		dispatcher.forward(req, resp);
+		
+		
+		// View 포워드
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/find/userId.jsp");
+		dispatcher.forward(req, resp);	
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 	}
-		
+	
+
 }

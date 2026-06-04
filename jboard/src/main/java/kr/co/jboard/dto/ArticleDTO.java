@@ -1,6 +1,8 @@
 package kr.co.jboard.dto;
 
 public class ArticleDTO {
+	
+	// Article 테이블 속성 확인
 	private int ano;
 	private String type;
 	private String title;
@@ -11,6 +13,7 @@ public class ArticleDTO {
 	private String writer;
 	private String regip;
 	private String wdate;
+	
 	public int getAno() {
 		return ano;
 	}
@@ -71,14 +74,11 @@ public class ArticleDTO {
 	public void setWdate(String wdate) {
 		this.wdate = wdate;
 	}
+	
 	@Override
 	public String toString() {
 		return "ArticleDTO [ano=" + ano + ", type=" + type + ", title=" + title + ", content=" + content + ", comment="
 				+ comment + ", file=" + file + ", hit=" + hit + ", writer=" + writer + ", regip=" + regip + ", wdate="
 				+ wdate + "]";
 	}
-	
-	
-	
-	
 }

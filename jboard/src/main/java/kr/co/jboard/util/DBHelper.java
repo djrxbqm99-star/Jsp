@@ -1,4 +1,4 @@
-package kr.co.jboard.utill;
+package kr.co.jboard.util;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,7 +25,7 @@ public class DBHelper {
 		DataSource ds = (DataSource) ctx.lookup("jdbc/board");
 		return ds.getConnection();
 	}
-	
+
 	public void closeAll() throws SQLException {
 		
 		if(rs != null) {
@@ -53,3 +53,9 @@ public class DBHelper {
 		}
 	}
 }
+
+
+
+
+
+

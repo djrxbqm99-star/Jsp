@@ -3,10 +3,9 @@ package kr.co.jboard.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import kr.co.jboard.dto.UserDTO;
-import kr.co.jboard.dto.UserDTO;
-import kr.co.jboard.utill.DBHelper;
-import kr.co.jboard.utill.SQL;
+import kr.co.jboard.dto.TermsDTO;
+import kr.co.jboard.util.DBHelper;
+import kr.co.jboard.util.SQL;
 
 public class TermsDAO extends DBHelper {
 	
@@ -18,96 +17,81 @@ public class TermsDAO extends DBHelper {
 	private TermsDAO() {}
 	
 	// 기본 CRUD 메서드
-	public UserDTO select(String userid) {
+	public TermsDTO select(int no) {
 		
-		UserDTO dto = null;
+		// 반환용 DTO
+		TermsDTO dto = null;
 		
 		try {
-			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_USER);
-			psmt.setString(1, userid);
+			conn = getConnection();						
+			psmt = conn.prepareStatement(SQL.SELECT_TERMS);
+			psmt.setInt(1, no);
 			
-			psmt.executeQuery();
+			rs = psmt.executeQuery();
+			
 			if(rs.next()) {
-				dto = new UserDTO();
-			}
+				dto = new TermsDTO();
+				dto.setNo(rs.getInt(1));
+				dto.setBasic(rs.getString(2));
+				dto.setPrivacy(rs.getString(3));
+			}			
 			closeAll();
-			
-			
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return dto;
 	}
-	public List<UserDTO> selectAll() {
+	
+	public List<TermsDTO> selectAll() {
 		
 		// 반환용 List
-		List<UserDTO> dtoList = new ArrayList<>();
+		List<TermsDTO> dtoList = new ArrayList<>();
 		
 		try {
 			conn = getConnection();
 			stmt = conn.createStatement();
+			rs = stmt.executeQuery(SQL.SELECT_ALL_TERMS);
 			
-			rs = stmt.executeQuery(SQL.SELECT_ALL_USER);
 			while(rs.next()) {
-				UserDTO dto = new UserDTO();
-				dto = new UserDTO();
-				
+				TermsDTO dto = new TermsDTO();
 				dtoList.add(dto);
 			}
-			
 			closeAll();
-			
-		} catch(Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
 		return dtoList;
 	}
-	public void insert(UserDTO dto) {
+	
+	public void insert(TermsDTO dto) {
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.INSERT_USER);
+			psmt = conn.prepareStatement(SQL.INSERT_TERMS);
 			psmt.executeUpdate();
-			
 			closeAll();
-			
-			
-			
-		} catch(Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
-	public void update(UserDTO dto) {
-		
+	
+	public void update(TermsDTO dto) {
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.UPDATE_USER);
+			psmt = conn.prepareStatement(SQL.UPDATE_TERMS);
 			psmt.executeUpdate();
-			
 			closeAll();
-			
-			
-			
-		} catch(Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
-	public void delete(String userid) {
+
+	public void delete(int no) {
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.DELETE_USER);
-			psmt.setString(1, userid);
+			psmt = conn.prepareStatement(SQL.DELETE_TERMS);
 			psmt.executeUpdate();
-			
 			closeAll();
-			
-			
-			
-		} catch(Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,21 +8,14 @@
 </head>
 <body>
     <div id="wrapper">
-        <header>
-            <h3>
-                <a href="/index.html" class="title">Board Project</a>
-            </h3>
-            <p>
-                <a href="../user/info.html" class="info">홍길동</a>님 반갑습니다.
-                <a href="#">[로그아웃]</a>
-            </p>
-        </header>
+        <%@ include file="./_head.jsp" %>
         <main id="article">
             <section class="write">
                 <nav>
                     <h1>글쓰기</h1>
                 </nav>
-                <form action="#">
+                <form action="/jboard/article/write.do" method="post">
+                		<input type="hidden" name="writer" value="${sessionScope.sessUser.userid}"/>
                     <table border="0">                        
                         <tr>
                             <th>제목</th>
@@ -54,12 +47,7 @@
 
             </section>
         </main>
-        <footer>
-            <p>
-                <span class="copyright">Copyrightⓒ 김철학(개발에반하다.)</span>
-                <span class="version">v1.0.1</span>
-            </p>
-        </footer>
+        <%@ include file="./_tail.jsp" %>
     </div>    
 </body>
 </html>

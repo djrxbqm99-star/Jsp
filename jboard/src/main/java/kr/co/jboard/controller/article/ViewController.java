@@ -15,18 +15,21 @@ public class ViewController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
-	// 서비스 가져오기 (열거함수 객체)
+	// 서비스 가져오기(열거상수 객체)
 	private ArticleService service = ArticleService.INSTANCE;
-
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher =  req.getRequestDispatcher("/WEB-INF/views/article/view.jsp");
-		dispatcher.forward(req, resp);
+		
+		
+		// View 포워드
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/article/view.jsp");
+		dispatcher.forward(req, resp);	
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 	}
-		
+	
+
 }

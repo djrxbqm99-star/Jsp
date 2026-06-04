@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.co.jboard.dto.ArticleDTO;
-import kr.co.jboard.utill.DBHelper;
-import kr.co.jboard.utill.SQL;
+import kr.co.jboard.util.DBHelper;
+import kr.co.jboard.util.SQL;
 
 public class ArticleDAO extends DBHelper {
 	
@@ -16,17 +16,20 @@ public class ArticleDAO extends DBHelper {
 	}
 	private ArticleDAO() {}
 	
+	
 	// 기본 CRUD 메서드
 	public ArticleDTO select(String ano) {
 		
+		// 반환용 DTO
 		ArticleDTO dto = null;
 		
 		try {
-			conn = getConnection();
+			conn = getConnection();						
 			psmt = conn.prepareStatement(SQL.SELECT_ARTICLE);
 			psmt.setString(1, ano);
 			
-			psmt.executeQuery();
+			rs = psmt.executeQuery();
+			
 			if(rs.next()) {
 				dto = new ArticleDTO();
 				dto.setAno(rs.getInt(1));
@@ -40,14 +43,15 @@ public class ArticleDAO extends DBHelper {
 				dto.setRegip(rs.getString(9));
 				dto.setWdate(rs.getString(10));
 			}
+			
 			closeAll();
 			
-			
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return dto;
 	}
+	
 	public List<ArticleDTO> selectAll() {
 		
 		// 반환용 List
@@ -56,11 +60,10 @@ public class ArticleDAO extends DBHelper {
 		try {
 			conn = getConnection();
 			stmt = conn.createStatement();
-			
 			rs = stmt.executeQuery(SQL.SELECT_ALL_ARTICLE);
+			
 			while(rs.next()) {
 				ArticleDTO dto = new ArticleDTO();
-				dto = new ArticleDTO();
 				dto.setAno(rs.getInt(1));
 				dto.setType(rs.getString(2));
 				dto.setTitle(rs.getString(3));
@@ -71,19 +74,15 @@ public class ArticleDAO extends DBHelper {
 				dto.setWriter(rs.getString(8));
 				dto.setRegip(rs.getString(9));
 				dto.setWdate(rs.getString(10));
-				
 				dtoList.add(dto);
 			}
-			
 			closeAll();
-			
-		} catch(Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
 		return dtoList;
 	}
+	
 	public void insert(ArticleDTO dto) {
 		try {
 			conn = getConnection();
@@ -93,18 +92,13 @@ public class ArticleDAO extends DBHelper {
 			psmt.setString(3, dto.getWriter());
 			psmt.setString(4, dto.getRegip());
 			psmt.executeUpdate();
-			
 			closeAll();
-			
-			
-			
-		} catch(Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
+	
 	public void update(ArticleDTO dto) {
-		
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.UPDATE_ARTICLE);
@@ -112,28 +106,20 @@ public class ArticleDAO extends DBHelper {
 			psmt.setString(2, dto.getContent());
 			psmt.setInt(3, dto.getAno());
 			psmt.executeUpdate();
-			
 			closeAll();
-			
-			
-			
-		} catch(Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
+
 	public void delete(String ano) {
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.DELETE_ARTICLE);
 			psmt.setString(1, ano);
 			psmt.executeUpdate();
-			
 			closeAll();
-			
-			
-			
-		} catch(Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

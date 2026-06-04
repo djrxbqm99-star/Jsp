@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,16 +8,7 @@
 </head>
 <body>
     <div id="wrapper">
-        <header>
-            <h3>
-                <a href="/index.html" class="title">Board Project</a>
-            </h3>
-            <p>
-                <a href="../user/info.html" class="info">홍길동</a>님 반갑습니다.
-                <a href="#">[로그아웃]</a>
-            </p>
-            </p>
-        </header>
+        <%@ include file="./_head.jsp" %>
         <main id="article">
             <section class="view">
                 <nav>
@@ -77,7 +68,7 @@
                     <form action="#">
                         <textarea name="content">댓글내용 입력</textarea>
                         <div>
-                            <a href="#" class="btn btnCancel">취소</a>
+                            <a href="/jobard/article/list.do" class="btn btnCancel">취소</a>
                             <input type="submit" value="작성완료" class="btn btnComplete"/>
                         </div>
                     </form>
@@ -85,12 +76,7 @@
 
             </section>
         </main>
-        <footer>
-            <p>
-                <span class="copyright">Copyrightⓒ 김철학(개발에반하다.)</span>
-                <span class="version">v1.0.1</span>
-            </p>
-        </footer>
+        <%@ include file="./_tail.jsp" %>
     </div>    
 </body>
 </html>
