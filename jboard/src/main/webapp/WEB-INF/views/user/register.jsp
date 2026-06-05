@@ -8,7 +8,6 @@
     <script src="//t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="/jboard/js/daumPostcode.js"></script>
 	<script src="/jboard/js/validation.js"></script>
-	
 </head>
 <body>
     <div id="wrapper">

@@ -7,16 +7,55 @@ public class SQL {
 															+ "type='free',"
 															+ "title=?,"
 															+ "content=?,"																			
+															+ "file=?,"																			
 															+ "writer=?,"
 															+ "regip=?,"
 															+ "wdate=NOW()";
 	
-	public static final String SELECT_ARTICLE = "SELECT * FROM Article WHERE ano=?";
-	public static final String SELECT_ALL_ARTICLE = "SELECT * FROM Article";
+	public static final String SELECT_ARTICLE = "SELECT "
+												+ "a.*, "
+												+ "u.nick, "
+												+ "f.* "
+												+ "FROM Article AS a "
+												+ "LEFT JOIN File AS f ON a.ano = f.ano "
+												+ "JOIN User AS u ON a.writer = u.userid "
+												+ "WHERE a.ano=?";
+	
+	public static final String SELECT_MAX_ANO = "SELECT MAX(ano) FROM Article";
+	public static final String SELECT_COUNT_ARTICLE = "SELECT COUNT(*) FROM Article";
+	
+	
+	
+	public static final String SELECT_ALL_ARTICLE = "SELECT a.*, u.nick FROM Article AS a "
+													+ "JOIN User AS u "
+													+ "ON a.writer = u.userid "
+													+ "ORDER BY ano DESC "
+													+ "LIMIT ?, 10";
+	
+	public static final String SELECT_COUNT_ARTICLE_JOIN = "SELECT COUNT(*) FROM Article AS a "
+																+ "JOIN User AS u ON a.writer = u.userid ";
+	public static final String SELECT_ALL_ARTICLE_JOIN = "SELECT a.*, u.nick FROM Article AS a "
+																+ "JOIN User AS u ON a.writer = u.userid ";
+	
+	public static final String WHERE_TITLE_KEYWORD = "WHERE title LIKE ? ";
+	public static final String WHERE_CONTENT_KEYWORD = "WHERE content LIKE ? ";
+	public static final String WHERE_NICK_KEYWORD = "WHERE nick LIKE ? ";
+	public static final String ORDER_LIMIT = "ORDER BY ano DESC LIMIT ?, 10";
+	
+	
+	
+	
 	public static final String UPDATE_ARTICLE = "UPDATE Article SET "
 															+ "title=?,"
 															+ "content=? "															
 															+ "WHERE ano=?";
+	public static final String UPDATE_ARTICLE_HIT = "UPDATE Article SET "
+														+ "hit=hit+1 "
+														+ "WHERE ano=?";
+												
+	
+	
+	
 	public static final String DELETE_ARTICLE = "DELETE FROM Article WHERE ano=?";
 	
 	// User
@@ -48,7 +87,11 @@ public class SQL {
 	public static final String DELETE_USER = "";
 	
 	// File
-	public static final String INSERT_FILE = "";
+	public static final String INSERT_FILE = "INSERT INTO File SET "
+												+ "ano=?,"
+												+ "ofname=?,"
+												+ "sfname=?,"
+												+ "rdate=NOW()";
 	public static final String SELECT_FILE = "";
 	public static final String SELECT_ALL_FILE = "";
 	public static final String UPDATE_FILE = "";
